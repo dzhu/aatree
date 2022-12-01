@@ -16,7 +16,7 @@ macro_rules! benchmark {
 		paste::item! {
 			fn [<$ty:lower _contains_ $amount _ $success>](container: &$ty<u64>, test: &[u64]) {
 				for i in test {
-					criterion::black_box(container.contains(i));
+					criterion::black_box(container.contains(criterion::black_box(i)));
 				}
 			}
 			fn [<bench_ $ty:lower _contains_ $amount _ $success>]<M: Measurement>(g: &mut BenchmarkGroup<M>, id: BenchmarkId) {
